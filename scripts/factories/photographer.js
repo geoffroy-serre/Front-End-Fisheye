@@ -1,17 +1,36 @@
-function photographerFactory(data) {
-    const { name, portrait } = data;
+// this.{name, portrait, city, country, tagline, price} = this.data;
+// const picture = `./assets/photographers/Photographers ID Photos/${portrait}`;
 
-    const picture = `assets/photographers/${portrait}`;
+export const getUserCardDOM = ({
+	name,
+	portrait,
+	city,
+	country,
+	tagline,
+	price,
+}) => {
+	const picture = `./assets/photographers/Photographers ID Photos/${portrait}`;
+	const article = document.createElement('article');
+	const img = document.createElement('img');
+	const h2 = document.createElement('h2');
+	const location = document.createElement('div');
+	const taglineEl = document.createElement('cite');
+	const showPrice = document.createElement('div');
 
-    function getUserCardDOM() {
-        const article = document.createElement( 'article' );
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = name;
-        article.appendChild(img);
-        article.appendChild(h2);
-        return (article);
-    }
-    return { name, picture, getUserCardDOM }
-}
+	img.setAttribute('src', picture);
+	img.setAttribute('alt', name);
+	h2.textContent = name;
+	location.textContent = `${city}, ${country}`;
+	taglineEl.textContent = tagline;
+	showPrice.textContent = `${price}€/jour`;
+
+	article.appendChild(img);
+	article.appendChild(h2);
+	article.appendChild(location);
+	article.appendChild(taglineEl);
+	article.appendChild(showPrice);
+
+	return article;
+};
+
+export default getUserCardDOM;
