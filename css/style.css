@@ -1,5 +1,20 @@
 @import url('photographer.css');
 
+:root {
+	--secondary: #d3573c;
+	--primary: #901c1c;
+	--light-grey: #fafafa;
+	--grey: #525252;
+	--dark-grey: #312e2e;
+	--light-red: #db8876;
+	--price: #757575;
+}
+
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
 body {
 	font-family: 'DM Sans', sans-serif;
 	margin: 0;
@@ -10,27 +25,27 @@ header {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	height: 90px;
+	height: 5.62rem;
 }
 
 h1 {
-	color: #901c1c;
-	margin-right: 100px;
+	color: var(--primary);
+	margin-right: 6.25rem;
 }
 
 .logo {
-	height: 50px;
-	margin-left: 100px;
+	height: 3.12rem;
+	margin-left: 6.25rem;
 }
 
 .photographer_section {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	gap: 70px;
-	margin-top: 100px;
+	gap: 4.37rem;
+	margin-top: 6.25rem;
 }
 
-.photographer_section article {
+.photographer-card {
 	justify-self: center;
 	display: flex;
 	justify-content: center;
@@ -38,14 +53,28 @@ h1 {
 	flex-direction: column;
 }
 
-.photographer_section article h2 {
-	color: #d3573c;
-	font-size: 36px;
+.photographer-card__name {
+	color: var(--secondary);
+	margin-top: 1.5rem;
+	font-size: 2.25rem;
 }
 
-.photographer_section article img {
-	height: 200px;
-	width: 200px;
+.photographer-card__photo {
+	height: 12.5rem;
+	width: 12.5rem;
 	border-radius: 50%;
 	object-fit: cover;
+}
+.photographer-card__location {
+	color: var(--primary);
+	font-size: 0.8rem;
+}
+.photographer-card__price {
+	font-size: 0.6rem;
+
+	color: var(--price);
+}
+.photographer-card__tagline {
+	font-size: 0.6rem;
+	line-height: 1.2rem;
 }

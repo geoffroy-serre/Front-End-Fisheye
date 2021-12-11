@@ -1,7 +1,10 @@
-import {getUserCardDOM} from '../factories/photographer.js';
+import {createUserCard} from '../factories/photographer.js';
 
-const DATA_FILE_PATH = '';
-const PHOTOGRAPHERS_ID_PICTURE_PATH = '';
+const DATA_FILE_PATH = './data';
+const DATA_FILE_NAME = 'photographers.json';
+const ASSETS_PATH = './assets';
+const PHOTOGRAPHERS_PATH = `${ASSETS_PATH}/photographers`;
+const PHOTOGRAPHERS_ID_PICTURES_PATH = `${PHOTOGRAPHERS_PATH}/Ids`;
 
 init();
 
@@ -15,11 +18,7 @@ async function init() {
  * @returns Array of photographers only.
  */
 async function getPhotographers() {
-	// const getDatas = await fetch('./data/photographers.json');
-	// const response = await getDatas.json();
-	// return response.photographers;
-
-	const data = await fetch('./data/photographers.json')
+	const data = await fetch(`${DATA_FILE_PATH}/${DATA_FILE_NAME}`)
 		.then((data) => data.json())
 		.catch((error) => console.log(error));
 
@@ -30,7 +29,10 @@ async function displayData(photographers) {
 	const photographersSection = document.querySelector('.photographer_section');
 
 	photographers.forEach((photographer) => {
-		const userCardDOM = getUserCardDOM(photographer);
+		const userCardDOM = createUserCard(
+			photographer,
+			PHOTOGRAPHERS_ID_PICTURES_PATH
+		);
 		photographersSection.appendChild(userCardDOM);
 	});
 }

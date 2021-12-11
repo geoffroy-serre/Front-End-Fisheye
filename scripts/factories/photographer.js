@@ -1,30 +1,36 @@
 // this.{name, portrait, city, country, tagline, price} = this.data;
 // const picture = `./assets/photographers/Photographers ID Photos/${portrait}`;
 
-export const getUserCardDOM = ({
-	name,
-	portrait,
-	city,
-	country,
-	tagline,
-	price,
-}) => {
-	const picture = `./assets/photographers/Photographers ID Photos/${portrait}`;
+export const createUserCard = (
+	{name, portrait, city, country, tagline, price},
+	PHOTOGRAPHERS_ID_PICTURES_PATH
+) => {
+	const picture = `${PHOTOGRAPHERS_ID_PICTURES_PATH}/${portrait}`;
 	const article = document.createElement('article');
 	const img = document.createElement('img');
 	const h2 = document.createElement('h2');
 	const location = document.createElement('div');
 	const taglineEl = document.createElement('cite');
 	const showPrice = document.createElement('div');
+	const link = document.createElement('a');
+
+	article.className = 'photographer-card';
+	h2.className = 'photographer-card__name';
+	img.className = 'photographer-card__photo';
+	location.className = 'photographer-card__location';
+	taglineEl.className = 'photographer-card__tagline';
+	showPrice.className = 'photographer-card__price';
 
 	img.setAttribute('src', picture);
 	img.setAttribute('alt', name);
+	link.setAttribute('href', `./photographer.html?bite`);
+
 	h2.textContent = name;
 	location.textContent = `${city}, ${country}`;
 	taglineEl.textContent = tagline;
 	showPrice.textContent = `${price}€/jour`;
-
-	article.appendChild(img);
+	link.appendChild(img);
+	article.appendChild(link);
 	article.appendChild(h2);
 	article.appendChild(location);
 	article.appendChild(taglineEl);
@@ -33,4 +39,4 @@ export const getUserCardDOM = ({
 	return article;
 };
 
-export default getUserCardDOM;
+export default createUserCard;
