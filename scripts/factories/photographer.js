@@ -2,7 +2,7 @@
 // const picture = `./assets/photographers/Photographers ID Photos/${portrait}`;
 
 export const createUserCard = (
-	{name, portrait, city, country, tagline, price},
+	{name, portrait, city, id, country, tagline, price},
 	PHOTOGRAPHERS_ID_PICTURES_PATH
 ) => {
 	const picture = `${PHOTOGRAPHERS_ID_PICTURES_PATH}/${portrait}`;
@@ -23,7 +23,7 @@ export const createUserCard = (
 
 	img.setAttribute('src', picture);
 	img.setAttribute('alt', name);
-	link.setAttribute('href', `./photographer.html?bite`);
+	link.setAttribute('href', `./photographer.html?id=${id}`);
 
 	h2.textContent = name;
 	location.textContent = `${city}, ${country}`;
