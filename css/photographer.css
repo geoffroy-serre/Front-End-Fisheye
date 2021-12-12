@@ -1,17 +1,4 @@
-#contact_modal {
-	display: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(196, 196, 196, 0.4);
-	z-index: 2;
-}
-
+/* -------------------- PHOTOGRAPH INFORMATION --------------------  */
 .photograph-header {
 	background-color: var(--light-grey);
 	height: 18.75rem;
@@ -53,12 +40,83 @@
 }
 
 #media-section {
-	margin: 1.5rem 6.25rem;
+	margin: 1rem 6.25rem;
 }
 
+/* -------------------- FILTER ELEMENTS --------------------  */
 .media__filter {
 	font-weight: 600;
 	font-size: 1.1rem;
+	display: flex;
+	align-items: center;
+}
+.select {
+	position: relative;
+	margin-left: 2rem;
+	width: 10rem;
+	cursor: pointer;
+	position: relative;
+	background-color: var(--primary);
+	color: white;
+	border-radius: 0.4rem;
+}
+
+.select__options {
+	display: none;
+	transform-origin: top;
+	list-style-type: none;
+	position: absolute;
+	bottom: -5.8rem;
+	background-color: var(--primary);
+	width: 10rem;
+	padding: 0 1rem;
+	box-shadow: 0 0.3rem 0.1rem 0 rgba(0, 0, 0, 0.1);
+	animation: filterMenu 150ms ease-in-out;
+}
+.select__options:last-child {
+	border-radius: 0 0 0.4rem 0.4rem;
+}
+
+.select__option {
+	border-top: 1px solid white;
+	padding: 0.8rem 0;
+}
+
+.select__current {
+	position: relative;
+	padding: 1.2rem 1rem;
+}
+
+/* 	clip-path: polygon(100% 65%, 100% 41%, 50% 0, 0 41%, 0 65%, 50% 25%);
+ */
+
+/* Styling the arrow of the select */
+.select__current::after {
+	position: absolute;
+	right: 1rem;
+	top: 1rem;
+	width: 1rem;
+	height: 1rem;
+	content: '';
+	transform: rotate(180deg);
+	background-color: white;
+	clip-path: polygon(100% 65%, 100% 41%, 50% 0, 0 41%, 0 65%, 50% 25%);
+}
+
+/* -------------------- MODAL --------------------  */
+
+#contact_modal {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(196, 196, 196, 0.4);
+	z-index: 2;
 }
 
 .contact_button {
@@ -128,4 +186,13 @@ form input {
 	height: 4.25rem;
 	border: none;
 	border-radius: 0.31rem;
+}
+
+@keyframes filterMenu {
+	from {
+		transform: scaleY(0);
+	}
+	to {
+		transform: scaleY(1);
+	}
 }
