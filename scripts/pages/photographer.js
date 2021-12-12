@@ -39,7 +39,7 @@ async function init() {
 
 function filterMenu(selectedOption) {
 	const select = document.querySelector('.select');
-	const selectOptionElements = document.querySelectorAll('.select__option');
+
 	const filterOptions = ['Popularité', 'Date', 'Titre'];
 	let currentOption = selectedOption;
 	const otherOptions = [];
@@ -49,19 +49,11 @@ function filterMenu(selectedOption) {
 	});
 
 	filterOptions.forEach((option) => {
-		console.log(option);
 		if (option.toLowerCase() != currentOption.toLowerCase()) {
 			otherOptions.push(option);
 		} else if (option.toLowerCase() == currentOption.toLowerCase()) {
 			currentOption = option;
 		}
-	});
-
-	selectOptionElements.forEach((e) => {
-		console.log(e);
-		e.addEventListener('click', () => {
-			console.log('bite');
-		});
 	});
 
 	const selectFilter = `
@@ -72,6 +64,12 @@ function filterMenu(selectedOption) {
     </ul>
     `;
 	select.innerHTML = selectFilter;
+
+	document.querySelectorAll('.select__option').forEach((e) => {
+		e.addEventListener('click', () => {
+			console.log(e.textContent);
+		});
+	});
 }
 
 async function populateInfos(photographers) {
