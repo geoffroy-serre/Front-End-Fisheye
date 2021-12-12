@@ -6,9 +6,45 @@
 	background-color: var(--light-grey);
 	height: 18.75rem;
 	margin: 0 6.25rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 2rem;
+}
+
+.photograph-header img {
+	height: 12.5rem;
+	width: 12.5rem;
+	border-radius: 50%;
+	object-fit: cover;
+}
+.photographer__info {
+	margin: 0;
+	padding: 0;
+}
+
+.photographer__name {
+	color: var(--secondary);
+	font-size: 4rem;
+	font-weight: 400;
+}
+
+.photographer__location {
+	line-height: 2rem;
+	color: var(--primary);
+	font-size: 1.4rem;
+}
+
+.photographer__tagline {
+	color: var(--grey);
+	font-size: 1.1rem;
+	font-style: normal;
+	line-height: 3rem;
 }
 
 .contact_button {
+	position: relative;
+	left: -5rem;
 	font-size: 1.25rem;
 	font-weight: bold;
 	color: white;
