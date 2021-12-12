@@ -1,5 +1,15 @@
 #contact_modal {
 	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(196, 196, 196, 0.4);
+	z-index: 2;
 }
 
 .photograph-header {
@@ -40,6 +50,15 @@
 	font-size: 1.1rem;
 	font-style: normal;
 	line-height: 3rem;
+}
+
+#media-section {
+	margin: 1.5rem 6.25rem;
+}
+
+.media__filter {
+	font-weight: 600;
+	font-size: 1.1rem;
 }
 
 .contact_button {

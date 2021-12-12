@@ -1,5 +1,5 @@
 export function displayModal(modalBlock) {
-	modalBlock.style.display = 'block';
+	modalBlock.style.display = 'flex';
 }
 
 export function closeModal(modalBlock) {

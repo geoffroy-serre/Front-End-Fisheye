@@ -6,7 +6,7 @@ import {
 	PHOTOGRAPHERS_ID_PICTURES_PATH,
 } from '../utils/variables.js';
 
-import {getPhotographers} from '../utils/retrieveData.js';
+import {getPhotographers, getMedias} from '../utils/retrieveData.js';
 
 const openModalButton = document.querySelector('.contact_button');
 const closeModalButton = document.querySelector('.close_button');
@@ -17,15 +17,25 @@ const photographerLocation = document.querySelector('.photographer__location');
 const photographerTagline = document.querySelector('.photographer__tagline');
 const photographerId = document.querySelector('.photographer__id');
 
-const photographers = await getPhotographers();
 console.log(urlParameter);
-
-populateInfos();
 
 openModalButton.addEventListener('click', () => displayModal(modalBlock));
 closeModalButton.addEventListener('click', () => closeModal(modalBlock));
 
-async function populateInfos() {
+init();
+
+/**
+ *
+ */
+async function init() {
+	const photographers = await getPhotographers();
+	const medias = await getMedias();
+
+	populateInfos(photographers);
+	populateMedias(medias);
+}
+
+async function populateInfos(photographers) {
 	photographers.forEach((photographer) => {
 		if (urlParameter == photographer.id) {
 			console.log(`found ${photographer.id}`);
@@ -36,6 +46,14 @@ async function populateInfos() {
 			photographerName.textContent = photographer.name;
 			photographerLocation.textContent = `${photographer.city}, ${photographer.country}`;
 			photographerTagline.textContent = photographer.tagline;
+		}
+	});
+}
+
+async function populateMedias(medias) {
+	medias.forEach((media) => {
+		if (media.photographerId == urlParameter) {
+			console.log(media);
 		}
 	});
 }

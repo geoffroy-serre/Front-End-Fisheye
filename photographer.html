@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 		<meta charset="utf-8" />
@@ -15,7 +15,7 @@
 			<img src="./assets/images/logo.png" class="logo" />
 		</header>
 		<main id="main">
-			<div class="photograph-header">
+			<section class="photograph-header">
 				<div class="photographer__info">
 					<h1 class="photographer__name"></h1>
 					<div class="photographer__location">Pamiers FR</div>
@@ -23,7 +23,17 @@
 				</div>
 				<button class="contact_button">Contactez-moi</button>
 				<img class="photographer__id" />
-			</div>
+			</section>
+			<section id="media-section">
+				<div class="media__filter">
+					<span>Trier par</span>
+					<select id="filter" name="filter">
+						<option value="popularity">Popularité</option>
+						<option value="date">Date</option>
+						<option value="title">Titre</option>
+					</select>
+				</div>
+			</section>
 		</main>
 		<div id="contact_modal">
 			<div class="modal">
@@ -33,9 +43,22 @@
 				</header>
 				<form>
 					<div>
-						<label>Prénom</label>
-						<input />
+						<label for="prenom">Prénom</label>
+						<input id="prenom" name="prenom" type="text" />
 					</div>
+					<div>
+						<label for="nom">Nom</label>
+						<input id="nom" name="nom" type="text" />
+					</div>
+					<div>
+						<label for="email">Email</label>
+						<input id="email" name="email" type="email" />
+					</div>
+					<div>
+						<label for="message">Votre message></label>
+						<textarea id="message" name="message"></textarea>
+					</div>
+
 					<button class="contact_button">Envoyer</button>
 				</form>
 			</div>
