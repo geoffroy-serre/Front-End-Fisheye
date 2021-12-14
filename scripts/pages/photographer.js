@@ -7,6 +7,7 @@ import {
 } from '../utils/variables.js';
 
 import {getPhotographers, getMedias} from '../utils/retrieveData.js';
+import {mediaFactory} from '../factories/media.js';
 
 // DOM Elements
 const openModalButton = document.querySelector('.contact_button');
@@ -39,14 +40,9 @@ async function init() {
 
 function filterMenu(selectedOption) {
 	const select = document.querySelector('.select');
-
 	const filterOptions = ['Popularité', 'Date', 'Titre'];
 	let currentOption = selectedOption;
 	const otherOptions = [];
-
-	select.addEventListener('click', () => {
-		document.querySelector('.select__options').style.display = 'block';
-	});
 
 	filterOptions.forEach((option) => {
 		if (option.toLowerCase() != currentOption.toLowerCase()) {
@@ -65,9 +61,23 @@ function filterMenu(selectedOption) {
     `;
 	select.innerHTML = selectFilter;
 
+	const selectCurrent = document.querySelector('.select__current');
+	const selectOptions = document.querySelector('.select__options');
+	console.log(selectOptions.style.display);
+
+	selectCurrent.addEventListener('click', () => {
+		console.log(selectOptions.style.display);
+		window.getComputedStyle(selectOptions).getPropertyValue('display') ===
+		'none'
+			? (selectOptions.style.display = 'block')
+			: (selectOptions.style.display = 'none');
+	});
+
 	document.querySelectorAll('.select__option').forEach((e) => {
 		e.addEventListener('click', () => {
 			console.log(e.textContent);
+			filterMenu(e.textContent);
+			selectOptions.style.display = 'none';
 		});
 	});
 }
@@ -87,11 +97,8 @@ async function populateInfos(photographers) {
 }
 
 async function populateMedias(medias) {
-	medias = 'bite';
-	return medias;
-	// medias.forEach((media) => {
-	// 	if (media.photographerId == urlParameter) {
-	// 		console.log(media);
-	// 	}
-	// });
+	const userMedias = medias.filter(
+		(m) => m.photographerId === parseInt(urlParameter)
+	);
+	mediaFactory(userMedias);
 }
