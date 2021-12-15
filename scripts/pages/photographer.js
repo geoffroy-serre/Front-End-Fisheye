@@ -1,11 +1,5 @@
-//Mettre le code JavaScript lié à la page photographer.html
 import {closeModal, displayModal} from '../utils/contactForm.js';
-import {
-	// DATA_FILE_PATH,
-	// DATA_FILE_NAME,
-	PHOTOGRAPHERS_ID_PICTURES_PATH,
-} from '../utils/variables.js';
-
+import {PHOTOGRAPHERS_ID_PICTURES_PATH} from '../utils/variables.js';
 import {getPhotographers, getMedias} from '../utils/retrieveData.js';
 import {mediaFactory} from '../factories/media.js';
 
@@ -18,29 +12,41 @@ const photographerName = document.querySelector('.photographer__name');
 const photographerLocation = document.querySelector('.photographer__location');
 const photographerTagline = document.querySelector('.photographer__tagline');
 const photographerId = document.querySelector('.photographer__id');
-const filterChoices = document.querySelectorAll('.select__option');
-const selectOptions = document.querySelector('.select__options');
-
-console.log(urlParameter);
-
-openModalButton.addEventListener('click', () => displayModal(modalBlock));
-closeModalButton.addEventListener('click', () => closeModal(modalBlock));
 
 const photographers = async () => await getPhotographers();
 const medias = async () => await getMedias();
 
 init();
 
-/**
- *
- */
 async function init() {
+	openModalButton.addEventListener('click', () => displayModal(modalBlock));
+	closeModalButton.addEventListener('click', () => closeModal(modalBlock));
 	populateInfos(await photographers());
 	filterMenu('popularité');
 	populateMedias(await medias(), 'popularité');
 }
 
-function filterMenu(selectedOption) {
+async function filterMenu(selectedOption) {
+	// const selectCurrentElement = document.createElement('div');
+	// selectCurrent.className = 'select-current';
+	// selectCurrent.textContent = currentOption;
+
+	// const list = document.createElement('ul');
+	// list.className = 'select__options';
+
+	// const optionOne = document.createElement('li');
+	// optionOne.className = "select__option";
+	// optionOne.textContent = otherOptions[0];
+
+	// const optionTwo = document.createElement('li');
+	// optionTwo.className = 'select__option';
+	// optionTwo.textContent = otherOptions[1];
+
+	// list.appendChild(optionOne);
+	// list.appendChild(optionTwo);
+	// select.appendChild(selectCurrentElement);
+	// select.appendChild(list);
+	const mediaList = await medias();
 	const select = document.querySelector('.select');
 	const filterOptions = ['Popularité', 'Date', 'Titre'];
 	let currentOption = selectedOption;
@@ -61,26 +67,6 @@ function filterMenu(selectedOption) {
     <li class="select__option">${otherOptions[1]}</li>
     </ul>
     `;
-
-	// const selectCurrentElement = document.createElement('div');
-	// selectCurrent.className = 'select-current';
-	// selectCurrent.textContent = currentOption;
-
-	// const list = document.createElement('ul');
-	// list.className = 'select__options';
-
-	// const optionOne = document.createElement('li');
-	// optionOne.className = "select__option";
-	// optionOne.textContent = otherOptions[0];
-
-	// const optionTwo = document.createElement('li');
-	// optionTwo.className = 'select__option';
-	// optionTwo.textContent = otherOptions[1];
-
-	// list.appendChild(optionOne);
-	// list.appendChild(optionTwo);
-	// select.appendChild(selectCurrentElement);
-	// select.appendChild(list);
 	select.innerHTML = selectFilter;
 
 	const selectCurrent = document.querySelector('.select__current');
@@ -93,14 +79,13 @@ function filterMenu(selectedOption) {
 			: (selectOptions.style.display = 'none');
 	});
 
-	filterChoices.forEach((e) => {
-		addEventListener('click', () => {
+	document.querySelectorAll('.select__option').forEach((e) => {
+		e.addEventListener('click', () => {
+			const wantedChoice = e.textContent;
+			document.querySelector('.gallery').innerHTML = '';
 			selectOptions.style.display = 'none';
-			const medias = medias().then((data) => {
-				console.log('click');
-				populateMedias(data, e.textContent);
-				filterMenu(e.textContent);
-			});
+			filterMenu(wantedChoice);
+			populateMedias(mediaList, wantedChoice);
 		});
 	});
 }
@@ -137,10 +122,8 @@ async function populateMedias(medias, orderWanted) {
 			userMedias.sort((a, b) => {
 				const dateA = new Date(a.date);
 				const dateB = new Date(b.date);
-				console.log(dateA - dateB);
 				return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
 			});
-			console.log(userMedias);
 			break;
 
 		case 'titre':

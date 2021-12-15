@@ -59,6 +59,7 @@
 	background-color: var(--primary);
 	color: white;
 	border-radius: 0.4rem;
+	z-index: 1;
 }
 
 .select__options {
