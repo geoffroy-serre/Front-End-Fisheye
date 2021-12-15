@@ -1,6 +1,3 @@
-// this.{name, portrait, city, country, tagline, price} = this.data;
-// const picture = `./assets/photographers/Photographers ID Photos/${portrait}`;
-
 export const createUserCard = (
 	{name, portrait, city, id, country, tagline, price},
 	PHOTOGRAPHERS_ID_PICTURES_PATH

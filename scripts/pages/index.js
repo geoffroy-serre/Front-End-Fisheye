@@ -1,9 +1,5 @@
 import {createUserCard} from '../factories/photographer.js';
-import {
-	DATA_FILE_PATH,
-	DATA_FILE_NAME,
-	PHOTOGRAPHERS_ID_PICTURES_PATH,
-} from '../utils/variables.js';
+import {PHOTOGRAPHERS_ID_PICTURES_PATH} from '../utils/variables.js';
 import {getPhotographers} from '../utils/retrieveData.js';
 
 init();

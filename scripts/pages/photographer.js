@@ -18,11 +18,16 @@ const photographerName = document.querySelector('.photographer__name');
 const photographerLocation = document.querySelector('.photographer__location');
 const photographerTagline = document.querySelector('.photographer__tagline');
 const photographerId = document.querySelector('.photographer__id');
+const filterChoices = document.querySelectorAll('.select__option');
+const selectOptions = document.querySelector('.select__options');
 
 console.log(urlParameter);
 
 openModalButton.addEventListener('click', () => displayModal(modalBlock));
 closeModalButton.addEventListener('click', () => closeModal(modalBlock));
+
+const photographers = async () => await getPhotographers();
+const medias = async () => await getMedias();
 
 init();
 
@@ -30,12 +35,9 @@ init();
  *
  */
 async function init() {
-	const photographers = await getPhotographers();
-	const medias = await getMedias();
-
-	populateInfos(photographers);
+	populateInfos(await photographers());
 	filterMenu('popularité');
-	populateMedias(medias);
+	populateMedias(await medias(), 'popularité');
 }
 
 function filterMenu(selectedOption) {
@@ -59,25 +61,46 @@ function filterMenu(selectedOption) {
     <li class="select__option">${otherOptions[1]}</li>
     </ul>
     `;
+
+	// const selectCurrentElement = document.createElement('div');
+	// selectCurrent.className = 'select-current';
+	// selectCurrent.textContent = currentOption;
+
+	// const list = document.createElement('ul');
+	// list.className = 'select__options';
+
+	// const optionOne = document.createElement('li');
+	// optionOne.className = "select__option";
+	// optionOne.textContent = otherOptions[0];
+
+	// const optionTwo = document.createElement('li');
+	// optionTwo.className = 'select__option';
+	// optionTwo.textContent = otherOptions[1];
+
+	// list.appendChild(optionOne);
+	// list.appendChild(optionTwo);
+	// select.appendChild(selectCurrentElement);
+	// select.appendChild(list);
 	select.innerHTML = selectFilter;
 
 	const selectCurrent = document.querySelector('.select__current');
 	const selectOptions = document.querySelector('.select__options');
-	console.log(selectOptions.style.display);
 
 	selectCurrent.addEventListener('click', () => {
-		console.log(selectOptions.style.display);
 		window.getComputedStyle(selectOptions).getPropertyValue('display') ===
 		'none'
 			? (selectOptions.style.display = 'block')
 			: (selectOptions.style.display = 'none');
 	});
 
-	document.querySelectorAll('.select__option').forEach((e) => {
-		e.addEventListener('click', () => {
-			console.log(e.textContent);
-			filterMenu(e.textContent);
+	filterChoices.forEach((e) => {
+		addEventListener('click', () => {
 			selectOptions.style.display = 'none';
+			const medias = medias().then((data) => {
+				console.log('click');
+				populateMedias(data, e.textContent);
+				filterMenu(e.textContent);
+			});
 		});
 	});
 }
@@ -96,9 +119,46 @@ async function populateInfos(photographers) {
 	});
 }
 
-async function populateMedias(medias) {
+async function populateMedias(medias, orderWanted) {
 	const userMedias = medias.filter(
 		(m) => m.photographerId === parseInt(urlParameter)
 	);
+	orderWanted = orderWanted.toLowerCase();
+
+	// Switch use to set the comapre method depending on orderWanted
+	switch (orderWanted) {
+		case 'popularité':
+			userMedias.sort((a, b) => {
+				return a.likes > b.likes ? -1 : a.likes < b.likes ? 1 : 0;
+			});
+			break;
+
+		case 'date':
+			userMedias.sort((a, b) => {
+				const dateA = new Date(a.date);
+				const dateB = new Date(b.date);
+				console.log(dateA - dateB);
+				return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
+			});
+			console.log(userMedias);
+			break;
+
+		case 'titre':
+			userMedias.sort((a, b) => {
+				let titleA = '';
+				let titleB = '';
+				a.image
+					? (titleA = a.title)
+					: (titleA = a.video.split('.')[0].replaceAll('_', ' '));
+				b.image
+					? (titleB = b.title)
+					: (titleB = b.video.split('.')[0].replaceAll('_', ' '));
+				return titleA < titleB ? -1 : titleA > titleB ? 1 : 0;
+			});
+			break;
+
+		default:
+			break;
+	}
 	mediaFactory(userMedias);
 }
