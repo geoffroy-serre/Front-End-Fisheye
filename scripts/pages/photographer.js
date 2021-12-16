@@ -2,6 +2,7 @@ import {closeModal, displayModal} from '../utils/contactForm.js';
 import {PHOTOGRAPHERS_ID_PICTURES_PATH} from '../utils/variables.js';
 import {getPhotographers, getMedias} from '../utils/retrieveData.js';
 import {mediaFactory} from '../factories/media.js';
+import {openLightBox} from '../utils/lightbox.js';
 
 // DOM Elements
 const openModalButton = document.querySelector('.contact_button');
@@ -12,6 +13,15 @@ const photographerName = document.querySelector('.photographer__name');
 const photographerLocation = document.querySelector('.photographer__location');
 const photographerTagline = document.querySelector('.photographer__tagline');
 const photographerId = document.querySelector('.photographer__id');
+
+let filteredMedias = [];
+
+/**
+ * If there is no urlParameter with Id, or id=0, redirect user to home page.
+ */
+if (!urlParameter || urlParameter == 0) {
+	document.location.href = './index.html';
+}
 
 const photographers = async () => await getPhotographers();
 const medias = async () => await getMedias();
@@ -27,25 +37,6 @@ async function init() {
 }
 
 async function filterMenu(selectedOption) {
-	// const selectCurrentElement = document.createElement('div');
-	// selectCurrent.className = 'select-current';
-	// selectCurrent.textContent = currentOption;
-
-	// const list = document.createElement('ul');
-	// list.className = 'select__options';
-
-	// const optionOne = document.createElement('li');
-	// optionOne.className = "select__option";
-	// optionOne.textContent = otherOptions[0];
-
-	// const optionTwo = document.createElement('li');
-	// optionTwo.className = 'select__option';
-	// optionTwo.textContent = otherOptions[1];
-
-	// list.appendChild(optionOne);
-	// list.appendChild(optionTwo);
-	// select.appendChild(selectCurrentElement);
-	// select.appendChild(list);
 	const mediaList = await medias();
 	const select = document.querySelector('.select');
 	const filterOptions = ['Popularité', 'Date', 'Titre'];
@@ -62,9 +53,9 @@ async function filterMenu(selectedOption) {
 
 	const selectFilter = `
     <div class="select__current">${currentOption}</div>
-	<ul class="select__options">
-    <li class="select__option">${otherOptions[0]}</li>
-    <li class="select__option">${otherOptions[1]}</li>
+		<ul class="select__options">
+    		<li class="select__option">${otherOptions[0]}</li>
+    		<li class="select__option">${otherOptions[1]}</li>
     </ul>
     `;
 	select.innerHTML = selectFilter;
@@ -143,5 +134,17 @@ async function populateMedias(medias, orderWanted) {
 		default:
 			break;
 	}
-	mediaFactory(userMedias);
+	filteredMedias = userMedias;
+
+	const gallerySection = document.querySelector('.gallery');
+	const mediaSection = document.querySelector('#media-section');
+	userMedias.forEach((media, index) => {
+		const mediaCard = mediaFactory(media);
+		gallerySection.appendChild(mediaCard);
+		mediaSection.appendChild(gallerySection);
+
+		mediaCard.addEventListener('click', () => {
+			openLightBox(index, filteredMedias);
+		});
+	});
 }
