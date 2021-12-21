@@ -13,7 +13,6 @@ handleLightboxEvents();
 
 function handleLightboxEvents() {
 	previous.addEventListener('click', () => {
-		console.log(index, index - 1);
 		if (index > 0) {
 			lightbox(index - 1, filteredMedias);
 			index -= 1;
@@ -47,9 +46,11 @@ export function openLightBox(startIndex, medias) {
 	filteredMedias = medias;
 	lightbox(index, filteredMedias);
 	lightboxClose.addEventListener('click', closeLightbox);
+	document.querySelector('main').style.display = 'none';
 }
 
 function closeLightbox() {
+	document.querySelector('main').style.display = 'block';
 	lightBoxContainer.style.display = 'none';
 	index = 0;
 }
@@ -57,6 +58,8 @@ function closeLightbox() {
 function lightbox(startIndex, data) {
 	const neededData = data[startIndex];
 	lightboxMedia.innerHTML = '';
+	const titleEl = document.createElement('H3');
+	titleEl.className = 'lightbox-media-title';
 
 	if (data[startIndex].image) {
 		const imageEl = document.createElement('img');
@@ -64,7 +67,7 @@ function lightbox(startIndex, data) {
 			'src',
 			`${PHOTOGRAPHERS_PATH}/${neededData.photographerId}/${neededData.image}`
 		);
-		imageEl.setAttribute('alt', `${data[startIndex].title}`);
+		imageEl.setAttribute('alt', `${data[startIndex].alt}`);
 
 		lightboxMedia.appendChild(imageEl);
 	} else if (data[startIndex].video) {
@@ -76,5 +79,16 @@ function lightbox(startIndex, data) {
 		);
 
 		lightboxMedia.appendChild(videoEl);
+
+		window.addEventListener('keydown', (e) => {
+			e.preventDefault();
+			if (e.key === ' ' && videoEl.paused) {
+				videoEl.play();
+			} else {
+				videoEl.pause();
+			}
+		});
 	}
+	titleEl.textContent = data[startIndex].title;
+	lightboxMedia.appendChild(titleEl);
 }

@@ -36,7 +36,6 @@ async function init() {
 	populateInfos(await photographers());
 	filterMenu('popularité');
 	populateMedias(await medias(), 'popularité');
-	// totalLikesAndPrice();
 }
 
 async function filterMenu(selectedOption) {
@@ -55,10 +54,10 @@ async function filterMenu(selectedOption) {
 	});
 
 	const selectFilter = `
-    <div class="select__current">${currentOption}</div>
+    <div class="select__current" role="button" aria-expanded="false">${currentOption}</div>
 		<ul class="select__options">
-    		<li class="select__option">${otherOptions[0]}</li>
-    		<li class="select__option">${otherOptions[1]}</li>
+    		<li class="select__option" role="button">${otherOptions[0]}</li>
+    		<li class="select__option" role="button">${otherOptions[1]}</li>
     </ul>
     `;
 	select.innerHTML = selectFilter;
@@ -66,11 +65,33 @@ async function filterMenu(selectedOption) {
 	const selectCurrent = document.querySelector('.select__current');
 	const selectOptions = document.querySelector('.select__options');
 
+	selectCurrent.addEventListener('keydown', (e) => {
+		console.log(e.key);
+		if (e.key === 'Enter') {
+			if (
+				window.getComputedStyle(selectOptions).getPropertyValue('display') ===
+				'none'
+			) {
+				selectOptions.style.display = 'block';
+				selectCurrent.setAttribute('aria-expanded', true);
+			} else {
+				selectOptions.style.display = 'none';
+				selectCurrent.setAttribute('aria-expanded', false);
+			}
+		}
+	});
+
 	selectCurrent.addEventListener('click', () => {
-		window.getComputedStyle(selectOptions).getPropertyValue('display') ===
-		'none'
-			? (selectOptions.style.display = 'block')
-			: (selectOptions.style.display = 'none');
+		if (
+			window.getComputedStyle(selectOptions).getPropertyValue('display') ===
+			'none'
+		) {
+			selectOptions.style.display = 'block';
+			selectCurrent.setAttribute('aria-expanded', true);
+		} else {
+			selectOptions.style.display = 'none';
+			selectCurrent.setAttribute('aria-expanded', false);
+		}
 	});
 
 	document.querySelectorAll('.select__option').forEach((e) => {
@@ -80,6 +101,15 @@ async function filterMenu(selectedOption) {
 			selectOptions.style.display = 'none';
 			filterMenu(wantedChoice);
 			populateMedias(mediaList, wantedChoice);
+		});
+		e.addEventListener('keydown', (e) => {
+			if (e.key === 'Enter') {
+				const wantedChoice = e.textContent;
+				document.querySelector('.gallery').innerHTML = '';
+				selectOptions.style.display = 'none';
+				filterMenu(wantedChoice);
+				populateMedias(mediaList, wantedChoice);
+			}
 		});
 	});
 }
@@ -148,10 +178,8 @@ async function populateMedias(medias, orderWanted) {
 		const mediaCard = mediaFactory(media, index, filteredMedias);
 		gallerySection.appendChild(mediaCard);
 		mediaSection.appendChild(gallerySection);
-		console.log(totalLikes);
 	});
 	totalLikesAndPrice();
-	console.log(totalLikes);
 }
 
 function totalLikesAndPrice() {

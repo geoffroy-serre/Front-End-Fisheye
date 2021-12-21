@@ -28,7 +28,7 @@ export const mediaFactory = (media, index, filteredMedias) => {
 		description.className = 'media-card__description';
 		image.className = 'media-card__media';
 
-		image.setAttribute('alt', `${media.title}`);
+		image.setAttribute('alt', `${media.alt}`);
 		image.setAttribute(
 			'src',
 			`${PHOTOGRAPHERS_PATH}/${media.photographerId}/${media.image}`
@@ -44,7 +44,6 @@ export const mediaFactory = (media, index, filteredMedias) => {
 		description.className = 'media-card__description';
 		video.className = 'media-card__media';
 
-		video.setAttribute('alt', `${media.title}`);
 		video.setAttribute(
 			'src',
 			`${PHOTOGRAPHERS_PATH}/${media.photographerId}/${media.video}`
@@ -73,10 +72,12 @@ export const mediaFactory = (media, index, filteredMedias) => {
 	heartIcon.addEventListener('click', () => {
 		if (container.classList.contains('liked')) {
 			likeNumber.textContent = parseInt(likeNumber.textContent) - 1;
+			likeNumber.classList.toggle('like-number--liked');
 			container.classList.toggle('liked');
 			decrementTotalLikes();
 		} else {
 			container.classList.toggle('liked');
+			likeNumber.classList.toggle('like-number--liked');
 			likeNumber.textContent = parseInt(likeNumber.textContent) + 1;
 			console.log('increment event');
 			incrementTotalLikes();
