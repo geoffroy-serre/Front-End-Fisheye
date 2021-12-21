@@ -1,14 +1,22 @@
 import {PHOTOGRAPHERS_PATH} from '../utils/variables.js';
+import {openLightBox} from '../utils/lightbox.js';
+import {
+	incrementTotalLikes,
+	decrementTotalLikes,
+} from '../pages/photographer.js';
 
-export const mediaFactory = (media) => {
+export const mediaFactory = (media, index, filteredMedias) => {
 	const container = document.createElement('div');
 	const mediaContainer = document.createElement('div');
 	const mediaLink = document.createElement('a');
 	const description = document.createElement('div');
 	const titleSpan = document.createElement('span');
-	const likeCount = document.createElement('div');
+	const likeDiv = document.createElement('div');
+	const likeNumber = document.createElement('span');
 	const heartIcon = document.createElement('i');
 
+	container.id = media.id;
+	likeNumber.className = 'like-number';
 	heartIcon.className = 'fas fa-heart';
 	container.className = 'media-card';
 	mediaContainer.className = 'media-card__container';
@@ -45,13 +53,35 @@ export const mediaFactory = (media) => {
 		mediaLink.setAttribute('href', `#`);
 		mediaLink.appendChild(video);
 	}
+
+	mediaLink.addEventListener('click', () => {
+		openLightBox(index, filteredMedias);
+	});
 	mediaContainer.appendChild(mediaLink);
 	description.appendChild(titleSpan);
-	likeCount.textContent = media.likes;
-	likeCount.appendChild(heartIcon);
-	description.appendChild(likeCount);
+	likeNumber.textContent = media.likes;
+	likeDiv.appendChild(likeNumber);
+	likeDiv.appendChild(heartIcon);
+	description.appendChild(likeDiv);
 	container.appendChild(mediaContainer);
 
 	container.appendChild(description);
+
+	/* As there is no  backend to save  liked photos, class liked is toggled to avoid
+	infinite linking in this demo version
+	*/
+	heartIcon.addEventListener('click', () => {
+		if (container.classList.contains('liked')) {
+			likeNumber.textContent = parseInt(likeNumber.textContent) - 1;
+			container.classList.toggle('liked');
+			decrementTotalLikes();
+		} else {
+			container.classList.toggle('liked');
+			likeNumber.textContent = parseInt(likeNumber.textContent) + 1;
+			console.log('increment event');
+			incrementTotalLikes();
+		}
+	});
+
 	return container;
 };
