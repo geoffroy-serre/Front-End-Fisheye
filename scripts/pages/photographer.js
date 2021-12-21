@@ -112,6 +112,7 @@ async function populateInfos(photographers) {
 
 			infoSection.innerHTML = infos;
 			photographerFullName = photographer.name;
+			photographerPrice = photographer.price;
 		}
 	});
 }
