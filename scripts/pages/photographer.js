@@ -17,6 +17,7 @@ const photographerId = document.querySelector('.photographer__id');
 let totalLikes = 0;
 let filteredMedias = [];
 let photographerPrice = 0;
+let photographerFullName = '';
 
 /**
  * If there is no urlParameter with Id, or id=0, redirect user to home page.
@@ -31,7 +32,9 @@ const medias = async () => await getMedias();
 init();
 
 async function init() {
-	openModalButton.addEventListener('click', () => displayModal(modalBlock));
+	openModalButton.addEventListener('click', () =>
+		displayModal(modalBlock, photographerFullName)
+	);
 	closeModalButton.addEventListener('click', () => closeModal(modalBlock));
 	populateInfos(await photographers());
 	filterMenu('popularité');
@@ -117,6 +120,7 @@ async function filterMenu(selectedOption) {
 async function populateInfos(photographers) {
 	photographers.forEach((photographer) => {
 		if (urlParameter == photographer.id) {
+			photographerFullName = photographer.name;
 			photographerPrice = photographer.price;
 			photographerId.setAttribute(
 				'src',

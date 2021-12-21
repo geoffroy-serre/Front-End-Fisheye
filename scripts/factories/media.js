@@ -67,7 +67,7 @@ export const mediaFactory = (media, index, filteredMedias) => {
 	container.appendChild(description);
 
 	/* As there is no  backend to save  liked photos, class liked is toggled to avoid
-	infinite linking in this demo version
+	infinite liking in this demo version
 	*/
 	heartIcon.addEventListener('click', () => {
 		if (container.classList.contains('liked')) {
