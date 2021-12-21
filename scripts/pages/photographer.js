@@ -5,14 +5,11 @@ import {mediaFactory} from '../factories/media.js';
 import {openLightBox} from '../utils/lightbox.js';
 
 // DOM Elements
-const openModalButton = document.querySelector('.contact_button');
+const openModalButton = document.querySelector('#contact_button');
 const closeModalButton = document.querySelector('.close_button');
 const modalBlock = document.getElementById('contact_modal');
 const urlParameter = new URLSearchParams(window.location.search).get('id');
-const photographerName = document.querySelector('.photographer__name');
-const photographerLocation = document.querySelector('.photographer__location');
-const photographerTagline = document.querySelector('.photographer__tagline');
-const photographerId = document.querySelector('.photographer__id');
+const infoSection = document.querySelector('.photograph-header');
 
 let totalLikes = 0;
 let filteredMedias = [];
@@ -32,13 +29,16 @@ const medias = async () => await getMedias();
 init();
 
 async function init() {
-	openModalButton.addEventListener('click', () =>
-		displayModal(modalBlock, photographerFullName)
-	);
-	closeModalButton.addEventListener('click', () => closeModal(modalBlock));
 	populateInfos(await photographers());
 	filterMenu('popularité');
 	populateMedias(await medias(), 'popularité');
+	console.log(openModalButton);
+	document
+		.querySelector('#contact_button')
+		.addEventListener('click', () =>
+			displayModal(modalBlock, photographerFullName)
+		);
+	closeModalButton.addEventListener('click', () => closeModal(modalBlock));
 }
 
 async function filterMenu(selectedOption) {
@@ -57,10 +57,10 @@ async function filterMenu(selectedOption) {
 	});
 
 	const selectFilter = `
-    <div class="select__current" role="button" aria-expanded="false">${currentOption}</div>
+    <div class="select__current"><button type="button" aria-expanded="false">${currentOption}<button></div>
 		<ul class="select__options">
-    		<li class="select__option" role="button">${otherOptions[0]}</li>
-    		<li class="select__option" role="button">${otherOptions[1]}</li>
+    		<li class="select__option" ><button>${otherOptions[0]}</button></li>
+    		<li class="select__option" ><button>${otherOptions[1]}</button></li>
     </ul>
     `;
 	select.innerHTML = selectFilter;
@@ -68,51 +68,31 @@ async function filterMenu(selectedOption) {
 	const selectCurrent = document.querySelector('.select__current');
 	const selectOptions = document.querySelector('.select__options');
 
-	selectCurrent.addEventListener('keydown', (e) => {
-		console.log(e.key);
-		if (e.key === 'Enter') {
-			if (
-				window.getComputedStyle(selectOptions).getPropertyValue('display') ===
-				'none'
-			) {
-				selectOptions.style.display = 'block';
-				selectCurrent.setAttribute('aria-expanded', true);
-			} else {
-				selectOptions.style.display = 'none';
-				selectCurrent.setAttribute('aria-expanded', false);
-			}
-		}
-	});
-
-	selectCurrent.addEventListener('click', () => {
+	selectCurrent.querySelector('button').addEventListener('click', () => {
 		if (
 			window.getComputedStyle(selectOptions).getPropertyValue('display') ===
 			'none'
 		) {
 			selectOptions.style.display = 'block';
-			selectCurrent.setAttribute('aria-expanded', true);
+			selectCurrent.querySelector('button').setAttribute('aria-expanded', true);
 		} else {
 			selectOptions.style.display = 'none';
-			selectCurrent.setAttribute('aria-expanded', false);
+			selectCurrent
+				.querySelector('button')
+				.setAttribute('aria-expanded', false);
 		}
 	});
 
 	document.querySelectorAll('.select__option').forEach((e) => {
-		e.addEventListener('click', () => {
+		e.querySelector('button').addEventListener('click', () => {
 			const wantedChoice = e.textContent;
 			document.querySelector('.gallery').innerHTML = '';
 			selectOptions.style.display = 'none';
+			selectCurrent
+				.querySelector('button')
+				.setAttribute('aria-expanded', false);
 			filterMenu(wantedChoice);
 			populateMedias(mediaList, wantedChoice);
-		});
-		e.addEventListener('keydown', (e) => {
-			if (e.key === 'Enter') {
-				const wantedChoice = e.textContent;
-				document.querySelector('.gallery').innerHTML = '';
-				selectOptions.style.display = 'none';
-				filterMenu(wantedChoice);
-				populateMedias(mediaList, wantedChoice);
-			}
 		});
 	});
 }
@@ -120,15 +100,18 @@ async function filterMenu(selectedOption) {
 async function populateInfos(photographers) {
 	photographers.forEach((photographer) => {
 		if (urlParameter == photographer.id) {
+			const infos = `
+			<div class="photographer__info">
+					<h1 class="photographer__name" role="heading" aria-label="Nom du photographe">${photographer.name}</h1>
+					<div class="photographer__location" role="text" aria-label="Lieu de résidence du photographe">${photographer.city}, ${photographer.country}</div>
+					<cite class="photographer__tagline">${photographer.tagline}</cite>
+				</div>
+				<button id="contact_button" class="contact_button">Contactez-moi</button>
+				<img class="photographer__id" src="${PHOTOGRAPHERS_ID_PICTURES_PATH}/${photographer.portrait}">
+			`;
+
+			infoSection.innerHTML = infos;
 			photographerFullName = photographer.name;
-			photographerPrice = photographer.price;
-			photographerId.setAttribute(
-				'src',
-				`${PHOTOGRAPHERS_ID_PICTURES_PATH}/${photographer.portrait}`
-			);
-			photographerName.textContent = photographer.name;
-			photographerLocation.textContent = `${photographer.city}, ${photographer.country}`;
-			photographerTagline.textContent = photographer.tagline;
 		}
 	});
 }

@@ -1,6 +1,4 @@
 export function displayModal(modalBlock, photographerName) {
-	console.log(typeof modalBlock);
-	console.log(modalBlock);
 	modalBlock.style.display = 'flex';
 	displayPhotographerName(photographerName);
 }

@@ -13,11 +13,13 @@
 * {
 	margin: 0;
 	box-sizing: border-box;
+	outline: none;
 }
 
 body {
 	font-family: 'DM Sans', sans-serif;
 	margin: 0;
+	overflow: hidden;
 }
 a {
 	text-decoration: none;
@@ -34,6 +36,16 @@ header {
 h1 {
 	color: var(--primary);
 	margin-right: 6.25rem;
+}
+
+button {
+	background-color: transparent;
+	font-weight: inherit;
+	border: none;
+	outline: none;
+	font-size: inherit;
+	color: inherit;
+	padding: 0;
 }
 
 .logo {

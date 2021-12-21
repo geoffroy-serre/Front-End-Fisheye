@@ -59,6 +59,9 @@ export const mediaFactory = (media, index, filteredMedias) => {
 	mediaContainer.appendChild(mediaLink);
 	description.appendChild(titleSpan);
 	likeNumber.textContent = media.likes;
+	likeNumber.setAttribute('role', 'Image');
+	likeNumber.setAttribute('aria-label', 'Nombre de likes');
+
 	likeDiv.appendChild(likeNumber);
 	likeDiv.appendChild(heartIcon);
 	description.appendChild(likeDiv);
