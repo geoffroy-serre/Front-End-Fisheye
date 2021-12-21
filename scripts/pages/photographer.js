@@ -15,6 +15,8 @@ const photographerTagline = document.querySelector('.photographer__tagline');
 const photographerId = document.querySelector('.photographer__id');
 
 let filteredMedias = [];
+let totalLikes = 0;
+let photographerPrice = 0;
 
 /**
  * If there is no urlParameter with Id, or id=0, redirect user to home page.
@@ -34,6 +36,7 @@ async function init() {
 	populateInfos(await photographers());
 	filterMenu('popularité');
 	populateMedias(await medias(), 'popularité');
+	totalLikesAndPrice();
 }
 
 async function filterMenu(selectedOption) {
@@ -84,6 +87,7 @@ async function filterMenu(selectedOption) {
 async function populateInfos(photographers) {
 	photographers.forEach((photographer) => {
 		if (urlParameter == photographer.id) {
+			photographerPrice = photographer.price;
 			photographerId.setAttribute(
 				'src',
 				`${PHOTOGRAPHERS_ID_PICTURES_PATH}/${photographer.portrait}`
@@ -101,7 +105,7 @@ async function populateMedias(medias, orderWanted) {
 	);
 	orderWanted = orderWanted.toLowerCase();
 
-	// Switch use to set the comapre method depending on orderWanted
+	// Switch use to set the compare method depending on orderWanted
 	switch (orderWanted) {
 		case 'popularité':
 			userMedias.sort((a, b) => {
@@ -139,6 +143,7 @@ async function populateMedias(medias, orderWanted) {
 	const gallerySection = document.querySelector('.gallery');
 	const mediaSection = document.querySelector('#media-section');
 	userMedias.forEach((media, index) => {
+		totalLikes += media.likes;
 		const mediaCard = mediaFactory(media);
 		gallerySection.appendChild(mediaCard);
 		mediaSection.appendChild(gallerySection);
@@ -147,4 +152,16 @@ async function populateMedias(medias, orderWanted) {
 			openLightBox(index, filteredMedias);
 		});
 	});
+}
+
+function totalLikesAndPrice() {
+	const container = document.createElement('div');
+	container.className = 'likesAndPrice';
+	const content = `
+	<span>${totalLikes} <i class="fas fa-heart"></i></span>
+	<span>${photographerPrice}€/jour</span>
+	`;
+	container.innerHTML = content;
+
+	document.querySelector('main').appendChild(container);
 }

@@ -4,16 +4,18 @@
 	height: 18.75rem;
 	margin: 0 6.25rem;
 	display: flex;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	align-items: center;
 	padding: 2rem;
 }
 
-.photograph-header img {
+.photographer__id {
 	height: 12.5rem;
 	width: 12.5rem;
 	border-radius: 50%;
 	object-fit: cover;
+	/* justify-self: flex-end; */
+	margin-left: auto;
 }
 .photographer__info {
 	margin: 0;
@@ -111,6 +113,7 @@
 	margin-top: 3rem;
 	row-gap: 2rem;
 	column-gap: 6.14rem;
+	margin-bottom: 3rem;
 }
 
 .media-card {
@@ -129,9 +132,30 @@
 }
 
 .media-card__description {
-	font-size: 1.2rem;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 1rem;
+	font-size: 1.3rem;
+	font-weight: 600;
 	color: var(--primary);
-	border-bottom: 1px solid black;
+}
+
+.media-card__description i {
+	padding-left: 0.2rem;
+	cursor: pointer;
+}
+
+.likesAndPrice {
+	font-size: 1.3rem;
+	background-color: var(--light-red);
+	width: 15rem;
+	display: flex;
+	justify-content: space-between;
+	padding: 0.8rem;
+	position: fixed;
+	bottom: 0;
+	right: 2rem;
+	border-radius: 0.3rem 0.3rem 0 0;
 }
 
 /* -------------------- MEDIA LIGHTBOX --------------------  */
@@ -184,7 +208,8 @@
 
 .contact_button {
 	position: relative;
-	left: -5rem;
+	left: 7rem;
+	top: 1rem;
 	font-size: 1.25rem;
 	font-weight: bold;
 	color: white;

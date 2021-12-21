@@ -64,6 +64,7 @@ function lightbox(startIndex, data) {
 			'src',
 			`${PHOTOGRAPHERS_PATH}/${neededData.photographerId}/${neededData.image}`
 		);
+		imageEl.setAttribute('alt', `${data[startIndex].title}`);
 
 		lightboxMedia.appendChild(imageEl);
 	} else if (data[startIndex].video) {

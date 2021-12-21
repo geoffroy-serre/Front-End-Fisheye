@@ -4,13 +4,19 @@ export const mediaFactory = (media) => {
 	const container = document.createElement('div');
 	const mediaContainer = document.createElement('div');
 	const mediaLink = document.createElement('a');
+	const description = document.createElement('div');
+	const titleSpan = document.createElement('span');
+	const likeCount = document.createElement('div');
+	const heartIcon = document.createElement('i');
+
+	heartIcon.className = 'fas fa-heart';
 	container.className = 'media-card';
 	mediaContainer.className = 'media-card__container';
 
 	if (media.image) {
 		const image = document.createElement('img');
-		const description = document.createElement('div');
-		description.textContent = `${media.title} avec ${media.likes}`;
+
+		titleSpan.textContent = media.title;
 		description.className = 'media-card__description';
 		image.className = 'media-card__media';
 
@@ -19,32 +25,33 @@ export const mediaFactory = (media) => {
 			'src',
 			`${PHOTOGRAPHERS_PATH}/${media.photographerId}/${media.image}`
 		);
+
 		mediaLink.setAttribute('href', '#');
 		mediaLink.appendChild(image);
-		mediaContainer.appendChild(mediaLink);
-		container.appendChild(mediaContainer);
-		container.appendChild(description);
 	} else if (media.video) {
-		const videoTitle = media.video.split('.')[0].replaceAll('_', ' ');
 		const video = document.createElement('video');
-		const description = document.createElement('div');
 
-		description.textContent = `${videoTitle} avec ${media.likes}`;
+		titleSpan.textContent = media.title;
 
 		description.className = 'media-card__description';
 		video.className = 'media-card__media';
 
-		video.setAttribute('alt', `${videoTitle}`);
+		video.setAttribute('alt', `${media.title}`);
 		video.setAttribute(
 			'src',
 			`${PHOTOGRAPHERS_PATH}/${media.photographerId}/${media.video}`
 		);
-		mediaLink.setAttribute('href', `#`);
 
+		mediaLink.setAttribute('href', `#`);
 		mediaLink.appendChild(video);
-		mediaContainer.appendChild(mediaLink);
-		container.appendChild(mediaContainer);
-		container.appendChild(description);
 	}
+	mediaContainer.appendChild(mediaLink);
+	description.appendChild(titleSpan);
+	likeCount.textContent = media.likes;
+	likeCount.appendChild(heartIcon);
+	description.appendChild(likeCount);
+	container.appendChild(mediaContainer);
+
+	container.appendChild(description);
 	return container;
 };
