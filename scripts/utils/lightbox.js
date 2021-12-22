@@ -72,6 +72,7 @@ function lightbox(startIndex, data) {
 		lightboxMedia.appendChild(imageEl);
 	} else if (data[startIndex].video) {
 		const videoEl = document.createElement('video');
+		videoEl.setAttribute('aria-label', data[startIndex].alt);
 		videoEl.setAttribute('controls', '');
 		videoEl.setAttribute(
 			'src',

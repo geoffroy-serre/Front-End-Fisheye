@@ -14,7 +14,7 @@
 	width: 12.5rem;
 	border-radius: 50%;
 	object-fit: cover;
-	/* justify-self: flex-end; */
+
 	margin-left: auto;
 }
 .photographer__info {
@@ -41,8 +41,17 @@
 	line-height: 3rem;
 }
 
-#media-section {
-	margin: 1rem 6.25rem;
+.contact_button {
+	font-size: 1.25rem;
+	font-weight: bold;
+	color: white;
+	padding: 0.69rem;
+	width: 10.62rem;
+	height: 4.38rem;
+	border: none;
+	background-color: var(--primary);
+	border-radius: 0.31rem;
+	cursor: pointer;
 }
 
 /* -------------------- FILTER ELEMENTS --------------------  */
@@ -103,6 +112,11 @@
 	clip-path: polygon(100% 65%, 100% 41%, 50% 0, 0 41%, 0 65%, 50% 25%);
 }
 /* -------------------- GALLERY --------------------  */
+
+#media-section {
+	margin: 1rem 6.25rem;
+}
+
 .gallery {
 	display: flex;
 	justify-content: left; /* gap: 6rem; */
@@ -132,13 +146,13 @@
 	display: flex;
 	justify-content: space-between;
 	padding-top: 1rem;
-	font-size: 1.3rem;
+	font-size: 1.09rem;
 	font-weight: 600;
 	color: var(--primary);
 }
 
-.media-card__description i {
-	padding-left: 0.2rem;
+.media-card__description span {
+	padding-left: 0.3rem;
 	cursor: pointer;
 }
 
@@ -225,21 +239,6 @@
 	height: 100%;
 	background-color: rgba(196, 196, 196, 0.4);
 	z-index: 2;
-}
-
-.contact_button {
-	position: relative;
-
-	font-size: 1.25rem;
-	font-weight: bold;
-	color: white;
-	padding: 0.69rem;
-	width: 10.62rem;
-	height: 4.38rem;
-	border: none;
-	background-color: var(--primary);
-	border-radius: 0.31rem;
-	cursor: pointer;
 }
 
 .modal .close_button {

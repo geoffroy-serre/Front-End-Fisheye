@@ -20,30 +20,16 @@
 	<body>
 		<header>
 			<a href="./index.html" aria-label="Lien vers l'accueil de Fisheye"
-				><img src="./assets/images/logo.png" class="logo"
+				><img src="./assets/images/logo.png" class="logo" alt="Logo FishEye"
 			/></a>
 		</header>
 		<main id="main">
-			<section class="photograph-header">
-				<!-- <div class="photographer__info">
-					<h1
-						class="photographer__name"
-						role="heading"
-						aria-label="Nom du photographe"
-					></h1>
-					<div
-						class="photographer__location"
-						role="text"
-						aria-label="Lieu de résidence du photographe"
-					></div>
-					<cite class="photographer__tagline"></cite>
-				</div>
-				<button class="contact_button">Contactez-moi</button>
-				<img class="photographer__id" /> -->
-			</section>
+			<section class="photograph-header"></section>
 			<section id="media-section">
 				<div class="media__filter">
-					<span>Trier par</span>
+					<span role="input label" aria-label="Choix du tri des photos"
+						>Trier par</span
+					>
 					<div class="select"></div>
 				</div>
 				<div class="gallery"></div>
@@ -54,7 +40,11 @@
 				<header>
 					<h2>Contactez-moi</h2>
 					<h3></h3>
-					<img src="./assets/icons/close.svg" class="close_button" />
+					<img
+						src="./assets/icons/close.svg"
+						class="close_button"
+						alt="Symbole de croix pour fermer la modale"
+					/>
 				</header>
 				<form>
 					<div>
@@ -80,12 +70,22 @@
 		</div>
 		<div class="media-modale">
 			<div class="lightbox">
-				<span class="lightbox__close"><i class="fas fa-times"></i></span>
-				<span class="lightbox__previous"
-					><i class="fas fa-chevron-left"></i
+				<span
+					class="lightbox__close"
+					role="button"
+					aria-label="Fermer la fenêtre d'apercu des images"
+					><span class="fas fa-times"></span
+				></span>
+				<span
+					class="lightbox__previous"
+					role="link"
+					aria-label="Image précédente"
+					><span class="fas fa-chevron-left"></span
 				></span>
 				<div class="lightbox__media"></div>
-				<span class="lightbox__next"><i class="fas fa-chevron-right"></i></span>
+				<span class="lightbox__next" role="link" aria-label="Image suivante"
+					><span class="fas fa-chevron-right"></span
+				></span>
 			</div>
 		</div>
 		<script type="module" src="./scripts/pages/photographer.js"></script>

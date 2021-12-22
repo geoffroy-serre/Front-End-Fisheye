@@ -13,7 +13,7 @@ export const mediaFactory = (media, index, filteredMedias) => {
 	const titleSpan = document.createElement('span');
 	const likeDiv = document.createElement('div');
 	const likeNumber = document.createElement('span');
-	const heartIcon = document.createElement('i');
+	const heartIcon = document.createElement('span');
 
 	container.id = media.id;
 	likeNumber.className = 'like-number';
@@ -40,7 +40,7 @@ export const mediaFactory = (media, index, filteredMedias) => {
 		const video = document.createElement('video');
 
 		titleSpan.textContent = media.title;
-
+		video.setAttribute('aria-label', media.alt);
 		description.className = 'media-card__description';
 		video.className = 'media-card__media';
 

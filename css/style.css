@@ -57,6 +57,7 @@ button {
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: 4.37rem;
 	margin-top: 6.25rem;
+	margin-bottom: 2rem;
 }
 
 .photographer-card {
@@ -81,14 +82,14 @@ button {
 }
 .photographer-card__location {
 	color: var(--primary);
-	font-size: 0.8rem;
+	font-size: 1.2rem;
 }
 .photographer-card__price {
-	font-size: 0.6rem;
+	font-size: 0.8rem;
 
 	color: var(--price);
 }
 .photographer-card__tagline {
-	font-size: 0.6rem;
+	font-size: 0.8rem;
 	line-height: 1.2rem;
 }

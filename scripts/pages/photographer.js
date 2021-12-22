@@ -57,10 +57,10 @@ async function filterMenu(selectedOption) {
 	});
 
 	const selectFilter = `
-    <div class="select__current"><button type="button" aria-expanded="false">${currentOption}<button></div>
-		<ul class="select__options">
-    		<li class="select__option" ><button>${otherOptions[0]}</button></li>
-    		<li class="select__option" ><button>${otherOptions[1]}</button></li>
+    <div class="select__current"><button type="button" role ="button"  aria-haspopup ="listbox" aria-expanded="false" aria-label="Tri actuel par ${currentOption}">${currentOption}<button></div>
+		<ul class="select__options" role ="listbox">
+    		<li class="select__option" ><button type="button" aria-label="Trier par ${otherOptions[0]}">${otherOptions[0]}</button></li>
+    		<li class="select__option" ><button type="button" aria-label="Trier par ${otherOptions[1]}">${otherOptions[1]}</button></li>
     </ul>
     `;
 	select.innerHTML = selectFilter;
@@ -102,12 +102,12 @@ async function populateInfos(photographers) {
 		if (urlParameter == photographer.id) {
 			const infos = `
 			<div class="photographer__info">
-					<h1 class="photographer__name" role="heading" aria-label="Nom du photographe">${photographer.name}</h1>
-					<div class="photographer__location" role="text" aria-label="Lieu de résidence du photographe">${photographer.city}, ${photographer.country}</div>
-					<cite class="photographer__tagline">${photographer.tagline}</cite>
-				</div>
-				<button id="contact_button" class="contact_button">Contactez-moi</button>
-				<img class="photographer__id" src="${PHOTOGRAPHERS_ID_PICTURES_PATH}/${photographer.portrait}">
+				<h1 class="photographer__name"  aria-label="Nom du photographe: ${photographer.name}">${photographer.name}</h1>
+				<div class="photographer__location" role="text" aria-label="Lieu de résidence du photographe: ">${photographer.city}, ${photographer.country}</div>
+				<cite class="photographer__tagline" role="text" aria-label="Slogan du photographe">${photographer.tagline}</cite>
+			</div>
+			<button id="contact_button" class="contact_button">Contactez-moi</button>
+			<img class="photographer__id" aria-label="Photo portrait de ${photographer.name}" src="${PHOTOGRAPHERS_ID_PICTURES_PATH}/${photographer.portrait}">
 			`;
 
 			infoSection.innerHTML = infos;
@@ -174,8 +174,8 @@ function totalLikesAndPrice() {
 	const container = document.createElement('div');
 	container.className = 'likesAndPrice';
 	const content = `
-	<span>${totalLikes} <i class="fas fa-heart"></i></span>
-	<span>${photographerPrice}€/jour</span>
+	<span aria-label="${totalLikes} likes sur l'ensemble des médias">${totalLikes} <i class="fas fa-heart"></i></span>
+	<span aria-label="${photographerPrice} euros par jour">${photographerPrice}€/jour</span>
 	`;
 	container.innerHTML = content;
 
