@@ -6,10 +6,8 @@ import {
 import {PHOTOGRAPHERS_ID_PICTURES_PATH} from '../utils/variables.js';
 import {getPhotographers, getMedias} from '../utils/retrieveData.js';
 import {mediaFactory} from '../factories/media.js';
-import {openLightBox} from '../utils/lightbox.js';
 
 // DOM Elements
-const openModalButton = document.querySelector('#contact_button');
 const closeModalButton = document.querySelector('.close_button');
 const modalBlock = document.getElementById('contact_modal');
 const urlParameter = new URLSearchParams(window.location.search).get('id');
