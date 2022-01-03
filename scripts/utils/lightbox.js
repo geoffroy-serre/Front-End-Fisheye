@@ -11,6 +11,10 @@ let filteredMedias = [];
 
 handleLightboxEvents();
 
+/**
+ * Initialize lightbox events.
+ * Handle click and keyboard navigation.
+ */
 function handleLightboxEvents() {
 	previous.addEventListener('click', () => {
 		if (index > 0) {
@@ -39,6 +43,11 @@ function handleLightboxEvents() {
 	});
 }
 
+/**
+ * Open Lightbox
+ * @param Number startIndex
+ * @param Array medias
+ */
 export function openLightBox(startIndex, medias) {
 	lightBoxContainer.style.display = 'block';
 	console.log(startIndex);
@@ -49,12 +58,21 @@ export function openLightBox(startIndex, medias) {
 	document.querySelector('main').style.display = 'none';
 }
 
+/**
+ * Close lightbox
+ */
 function closeLightbox() {
 	document.querySelector('main').style.display = 'block';
 	lightBoxContainer.style.display = 'none';
 	index = 0;
 }
 
+/**
+ * Image is defined but its index regarding the given array.
+ * Attributes are set for alt text and aria label.
+ * @param Number startIndex
+ * @param Array data
+ */
 function lightbox(startIndex, data) {
 	const neededData = data[startIndex];
 	lightboxMedia.innerHTML = '';

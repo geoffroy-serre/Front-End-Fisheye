@@ -1,4 +1,8 @@
-import {closeModal, displayModal} from '../utils/contactForm.js';
+import {
+	closeModal,
+	displayModal,
+	submitContactForm,
+} from '../utils/contactForm.js';
 import {PHOTOGRAPHERS_ID_PICTURES_PATH} from '../utils/variables.js';
 import {getPhotographers, getMedias} from '../utils/retrieveData.js';
 import {mediaFactory} from '../factories/media.js';
@@ -16,7 +20,7 @@ let filteredMedias = [];
 let photographerPrice = 0;
 let photographerFullName = '';
 
-/**
+/*
  * If there is no urlParameter with Id, or id=0, redirect user to home page.
  */
 if (!urlParameter || urlParameter == 0) {
@@ -28,19 +32,36 @@ const medias = async () => await getMedias();
 
 init();
 
+/**
+ * Initialize page.
+ * Retrieve and show content of information block.
+ * Populate the filterMenu options.
+ * Retrieve and display medias.
+ * Create event listeners for contact form and button.
+ */
 async function init() {
 	populateInfos(await photographers());
 	filterMenu('popularité');
 	populateMedias(await medias(), 'popularité');
-	console.log(openModalButton);
+
 	document
 		.querySelector('#contact_button')
 		.addEventListener('click', () =>
 			displayModal(modalBlock, photographerFullName)
 		);
 	closeModalButton.addEventListener('click', () => closeModal(modalBlock));
+
+	document
+		.querySelector('#btn-contact-submit')
+		.addEventListener('click', (e) => submitContactForm(e, modalBlock));
 }
 
+/**
+ * Populate the filter menu.
+ * It display first the selectedOption, and then put the other options in dropdown menu
+ * Menu options are in a const filterOptions in the function.
+ * @param String selectedOption
+ */
 async function filterMenu(selectedOption) {
 	const mediaList = await medias();
 	const select = document.querySelector('.select');
@@ -97,6 +118,10 @@ async function filterMenu(selectedOption) {
 	});
 }
 
+/**
+ * When a photographer from the given array match the url parameter, it display the informations(name, city etc..).
+ * @param Array photographers
+ */
 async function populateInfos(photographers) {
 	photographers.forEach((photographer) => {
 		if (urlParameter == photographer.id) {
@@ -117,6 +142,13 @@ async function populateInfos(photographers) {
 	});
 }
 
+/**
+ * Display the medias depending on the order wanted.
+ * The media Array is browsed and ordered dependenng the order wanted: likes, date, from a to z.
+ * For each media found, the media factory is called to create the card
+ * @param Array medias
+ * @param String orderWanted
+ */
 async function populateMedias(medias, orderWanted) {
 	totalLikes = 0;
 	const userMedias = medias.filter(
@@ -170,6 +202,10 @@ async function populateMedias(medias, orderWanted) {
 	totalLikesAndPrice();
 }
 
+/**
+ * Compute the total likes of all medias for the current photographer page.
+ * Show photographer price.
+ */
 function totalLikesAndPrice() {
 	const container = document.createElement('div');
 	container.className = 'likesAndPrice';
@@ -182,10 +218,17 @@ function totalLikesAndPrice() {
 	document.querySelector('main').appendChild(container);
 }
 
+/**
+ * Add 1 to total likes counter
+ */
 export function incrementTotalLikes() {
 	totalLikes += 1;
 	totalLikesAndPrice();
 }
+
+/**
+ * Substract 1 to total likes counter
+ */
 export function decrementTotalLikes() {
 	totalLikes -= 1;
 	totalLikesAndPrice();

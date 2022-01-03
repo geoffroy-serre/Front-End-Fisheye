@@ -5,8 +5,18 @@ import {
 	decrementTotalLikes,
 } from '../pages/photographer.js';
 
+/**
+ * Create media card with the given media.
+ * It can take images and video.
+ * It ad an event listener on click on the card. On click open a lightbox at the index corresponding to the card.
+ * The index is the position of the medias, in an array of media of a certain order defined previously.
+ * @param Object media
+ * @param Number index
+ * @param Array filteredMedias
+ * @returns HTMLElement.
+ */
 export const mediaFactory = (media, index, filteredMedias) => {
-	const container = document.createElement('div');
+	const container = document.createElement('article');
 	const mediaContainer = document.createElement('div');
 	const mediaLink = document.createElement('a');
 	const description = document.createElement('div');

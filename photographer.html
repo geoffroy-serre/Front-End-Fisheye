@@ -36,35 +36,66 @@
 			</section>
 		</main>
 		<div id="contact_modal">
-			<div class="modal">
+			<div class="modal" aria-labelledby="contact-me">
 				<header>
-					<h2>Contactez-moi</h2>
-					<h3></h3>
+					<h1 id="contact-me"></h1>
 					<img
+						role="button"
+						aria-label="Fermer le formulaire de contact"
 						src="./assets/icons/close.svg"
 						class="close_button"
 						alt="Symbole de croix pour fermer la modale"
 					/>
 				</header>
-				<form>
+				<form id="contact-form">
 					<div>
-						<label for="prenom">Prénom</label>
-						<input id="prenom" name="prenom" type="text" />
+						<label id="prenom" for="firstname">Prénom</label>
+						<input
+							id="firstNameInput"
+							name="firstname"
+							type="text"
+							aria-labelledby="prenom"
+							required
+						/>
 					</div>
 					<div>
-						<label for="nom">Nom</label>
-						<input id="nom" name="nom" type="text" />
+						<label id="name" for="nom">Nom</label>
+						<input
+							id="nameInput"
+							name="nom"
+							type="text"
+							aria-labelledby="name"
+							required
+						/>
 					</div>
 					<div>
-						<label for="email">Email</label>
-						<input id="email" name="email" type="email" />
+						<label id="email" for="email">Email</label>
+						<input
+							id="emailInput"
+							name="email"
+							type="email"
+							aria-labelledby="email"
+							required
+						/>
 					</div>
 					<div>
-						<label for="message">Votre message></label>
-						<textarea id="message" name="message"></textarea>
+						<label id="message" for="message">Votre message</label>
+						<textarea
+							id="messageInput"
+							name="message"
+							aria-labelledby="message"
+							required
+						></textarea>
 					</div>
 
-					<button class="contact_button">Envoyer</button>
+					<button
+						id="btn-contact-submit"
+						type="submit"
+						class="contact_button"
+						aria-labelledby="Envoyer le forumulaire"
+					>
+						Envoyer
+					</button>
 				</form>
 			</div>
 		</div>

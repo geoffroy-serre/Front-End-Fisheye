@@ -273,11 +273,10 @@
 	cursor: pointer;
 }
 
-.modal header h2,
-.modal header h3 {
+.modal header h1 {
+	color: black;
 	font-size: 4rem;
 	font-weight: normal;
-	text-align: center;
 }
 
 form {

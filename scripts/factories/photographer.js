@@ -1,3 +1,10 @@
+/**
+ * Photographer factory, create photographers card.
+ * Use a destructured photograph object.
+ * @param String name, portrait, city, id, country, tagline, price
+ * @param String PHOTOGRAPHERS_ID_PICTURES_PATH
+ * @returns
+ */
 export const createUserCard = (
 	{name, portrait, city, id, country, tagline, price},
 	PHOTOGRAPHERS_ID_PICTURES_PATH
