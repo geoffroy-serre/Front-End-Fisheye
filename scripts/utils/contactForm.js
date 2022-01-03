@@ -11,7 +11,7 @@ function displayPhotographerName(name) {
 	const modal = document.querySelector('.modal');
 	modal
 		.querySelector('header')
-		.querySelector('h1').textContent = `Contactez-moi ${name}`;
+		.querySelector('h1').innerHTML = `Contactez-moi</br>${name}`;
 }
 
 /**
