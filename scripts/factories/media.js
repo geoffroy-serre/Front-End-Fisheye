@@ -29,7 +29,6 @@ export const mediaFactory = (media, index, filteredMedias) => {
 	likeNumber.className = 'like-number';
 	heartIcon.className = 'fas fa-heart';
 	container.className = 'media-card';
-	// mediaContainer.className = 'media-card__container';
 
 	titleSpan.setAttribute('tabindex', 0);
 	likeNumber.setAttribute('tabindex', 0);
@@ -45,7 +44,7 @@ export const mediaFactory = (media, index, filteredMedias) => {
 		image.className = 'media-card__media';
 
 		image.setAttribute('alt', `Photo: 	${media.alt}`);
-		image.setAttribute('tabindex', 0);
+
 		image.setAttribute(
 			'src',
 			`${PHOTOGRAPHERS_PATH}/${media.photographerId}/${media.image}`
@@ -65,7 +64,6 @@ export const mediaFactory = (media, index, filteredMedias) => {
 			'src',
 			`${PHOTOGRAPHERS_PATH}/${media.photographerId}/${media.video}`
 		);
-		video.setAttribute('tabindex', 0);
 
 		mediaLink.setAttribute('href', `#`);
 		mediaLink.appendChild(video);
@@ -84,7 +82,6 @@ export const mediaFactory = (media, index, filteredMedias) => {
 	likeDiv.appendChild(likeNumber);
 	likeDiv.appendChild(heartIcon);
 	description.appendChild(likeDiv);
-	// container.appendChild(mediaContainer);
 
 	container.appendChild(description);
 

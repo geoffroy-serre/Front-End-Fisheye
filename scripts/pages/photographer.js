@@ -8,7 +8,7 @@ import {getPhotographers, getMedias} from '../utils/retrieveData.js';
 import {mediaFactory} from '../factories/media.js';
 
 // DOM Elements
-const closeModalButton = document.querySelector('.close_button');
+const closeModalButton = document.querySelector('#modal-close');
 const modalBlock = document.getElementById('contact_modal');
 const urlParameter = new URLSearchParams(window.location.search).get('id');
 const infoSection = document.querySelector('.photograph-header');

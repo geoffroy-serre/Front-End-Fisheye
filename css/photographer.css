@@ -127,15 +127,20 @@
 	margin-bottom: 3rem;
 }
 
+.media-card > a {
+	display: inline-block;
+	width: 21.87rem;
+	height: 18.75rem;
+}
 .media-card {
 	margin-bottom: 2rem;
 	width: 21.87rem;
 	height: 18.75rem;
 }
-.media-card__container {
+/* .media-card__container {
 	width: 21.87rem;
 	height: 18.75rem;
-}
+} */
 
 .media-card__media {
 	height: 100%;
@@ -244,10 +249,13 @@
 	z-index: 2;
 }
 
-.modal .close_button {
+#modal-close {
 	position: absolute;
 	right: 0;
 	top: 0;
+}
+
+.modal .close_button {
 }
 
 .modal {
