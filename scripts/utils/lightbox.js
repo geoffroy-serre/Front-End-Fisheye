@@ -41,6 +41,7 @@ function handleLightboxEvents() {
 			index += 1;
 		}
 	});
+	lightboxClose.addEventListener('click', closeLightbox);
 }
 
 /**
@@ -54,9 +55,9 @@ export function openLightBox(startIndex, medias) {
 	index = startIndex;
 	filteredMedias = medias;
 	lightbox(index, filteredMedias);
-	lightboxClose.addEventListener('click', closeLightbox);
+
 	document.querySelector('main').style.display = 'none';
-	lightBoxContainer.querySelector('tabindex[1]').focus();
+	lightBoxContainer.focus();
 }
 
 /**
@@ -82,7 +83,6 @@ function lightbox(startIndex, data) {
 
 	if (data[startIndex].image) {
 		const imageEl = document.createElement('img');
-		imageEl.setAttribute('tabindex', 1);
 		imageEl.setAttribute(
 			'src',
 			`${PHOTOGRAPHERS_PATH}/${neededData.photographerId}/${neededData.image}`
@@ -98,8 +98,8 @@ function lightbox(startIndex, data) {
 			'src',
 			`${PHOTOGRAPHERS_PATH}/${neededData.photographerId}/${neededData.video}`
 		);
-		videoEl.setAttribute('tabindex', 1);
-		videoEl.focus();
+
+		lightboxMedia.appendChild(videoEl);
 
 		window.addEventListener('keydown', (e) => {
 			e.preventDefault();

@@ -129,6 +129,8 @@
 
 .media-card {
 	margin-bottom: 2rem;
+	width: 21.87rem;
+	height: 18.75rem;
 }
 .media-card__container {
 	width: 21.87rem;
@@ -205,7 +207,7 @@
 	color: var(--primary);
 }
 
-.lightbox .fa-times {
+.lightbox .lightbox__close {
 	position: absolute;
 	top: 5.3rem;
 	right: 10rem;

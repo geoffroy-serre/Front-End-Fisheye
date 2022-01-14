@@ -16,10 +16,10 @@ import {
  * @returns HTMLElement.
  */
 export const mediaFactory = (media, index, filteredMedias) => {
-	const container = document.createElement('article');
-	const mediaContainer = document.createElement('div');
+	const container = document.createElement('figure');
+	// const mediaContainer = document.createElement('div');
 	const mediaLink = document.createElement('a');
-	const description = document.createElement('div');
+	const description = document.createElement('figcaption');
 	const titleSpan = document.createElement('span');
 	const likeDiv = document.createElement('div');
 	const likeNumber = document.createElement('span');
@@ -29,7 +29,7 @@ export const mediaFactory = (media, index, filteredMedias) => {
 	likeNumber.className = 'like-number';
 	heartIcon.className = 'fas fa-heart';
 	container.className = 'media-card';
-	mediaContainer.className = 'media-card__container';
+	// mediaContainer.className = 'media-card__container';
 
 	titleSpan.setAttribute('tabindex', 0);
 	likeNumber.setAttribute('tabindex', 0);
@@ -44,7 +44,7 @@ export const mediaFactory = (media, index, filteredMedias) => {
 		description.className = 'media-card__description';
 		image.className = 'media-card__media';
 
-		image.setAttribute('alt', `Photo: ${media.alt}`);
+		image.setAttribute('alt', `Photo: 	${media.alt}`);
 		image.setAttribute('tabindex', 0);
 		image.setAttribute(
 			'src',
@@ -57,7 +57,7 @@ export const mediaFactory = (media, index, filteredMedias) => {
 		const video = document.createElement('video');
 
 		titleSpan.textContent = media.title;
-		video.setAttribute('aria-label', media.alt);
+		video.setAttribute('title', media.alt);
 		description.className = 'media-card__description';
 		video.className = 'media-card__media';
 
@@ -74,7 +74,8 @@ export const mediaFactory = (media, index, filteredMedias) => {
 	mediaLink.addEventListener('click', () => {
 		openLightBox(index, filteredMedias);
 	});
-	mediaContainer.appendChild(mediaLink);
+
+	container.appendChild(mediaLink);
 	description.appendChild(titleSpan);
 	likeNumber.textContent = media.likes;
 	likeNumber.setAttribute('role', 'Image');
@@ -83,7 +84,7 @@ export const mediaFactory = (media, index, filteredMedias) => {
 	likeDiv.appendChild(likeNumber);
 	likeDiv.appendChild(heartIcon);
 	description.appendChild(likeDiv);
-	container.appendChild(mediaContainer);
+	// container.appendChild(mediaContainer);
 
 	container.appendChild(description);
 

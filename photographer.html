@@ -113,20 +113,27 @@
 		</div>
 		<div class="media-modale">
 			<div class="lightbox">
-				<span
+				<button
+					tabindex="0"
 					class="lightbox__close"
 					role="button"
 					aria-label="Fermer la fenêtre d'apercu des images"
-					><span class="fas fa-times"></span
-				></span>
+				>
+					<span class="fas fa-times"></span>
+				</button>
 				<span
+					tabindex="0"
 					class="lightbox__previous"
 					role="link"
 					aria-label="Image précédente"
 					><span class="fas fa-chevron-left"></span
 				></span>
-				<div class="lightbox__media"></div>
-				<span class="lightbox__next" role="link" aria-label="Image suivante"
+				<div tabindex="0" class="lightbox__media"></div>
+				<span
+					tabindex="0"
+					class="lightbox__next"
+					role="link"
+					aria-label="Image suivante"
 					><span class="fas fa-chevron-right"></span
 				></span>
 			</div>

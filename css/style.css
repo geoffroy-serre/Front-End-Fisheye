@@ -16,6 +16,10 @@
 	outline: none;
 }
 
+*:focus {
+	border: 2px solid blue;
+}
+
 body {
 	max-width: 1440px;
 	margin: 0 auto;
