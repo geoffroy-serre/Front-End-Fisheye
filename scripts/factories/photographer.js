@@ -28,15 +28,18 @@ export const createUserCard = (
 	img.setAttribute('src', picture);
 	img.setAttribute('alt', `Photo portrait de ${name}`);
 	link.setAttribute('href', `./photographer.html?id=${id}`);
+	h2.setAttribute('tabindex', 0);
 
 	h2.textContent = name;
 	location.textContent = `${city}, ${country}`;
 	location.setAttribute('role', 'text');
 	location.setAttribute('aria-label', 'Lieu de résidence du photographe');
+	location.setAttribute('tabindex', 0);
 
 	taglineEl.textContent = tagline;
 	taglineEl.setAttribute('role', 'text');
 	taglineEl.setAttribute('aria-label', 'Slogan du photographe');
+	taglineEl.setAttribute('tabindex', 0);
 
 	showPrice.textContent = `${price}€/jour`;
 	showPrice.setAttribute('role', 'text');
@@ -44,6 +47,7 @@ export const createUserCard = (
 		'aria-label',
 		`Prix du photographe: ${price} euros par jour`
 	);
+	showPrice.setAttribute('tabindex', 0);
 
 	link.appendChild(img);
 	article.appendChild(link);

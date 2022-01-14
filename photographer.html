@@ -27,7 +27,10 @@
 			<section class="photograph-header"></section>
 			<section id="media-section">
 				<div class="media__filter">
-					<span role="input label" aria-label="Choix du tri des photos"
+					<span
+						tabindex="0"
+						role="input label"
+						aria-label="Choix du tri des photos"
 						>Trier par</span
 					>
 					<div class="select"></div>
@@ -35,11 +38,12 @@
 				<div class="gallery"></div>
 			</section>
 		</main>
-		<div id="contact_modal">
+		<div id="contact_modal" role="dialog">
 			<div class="modal" aria-labelledby="contact-me">
 				<header>
-					<h1 id="contact-me"></h1>
+					<h1 tabindex="0" id="contact-me"></h1>
 					<img
+						tabindex="0"
 						role="button"
 						aria-label="Fermer le formulaire de contact"
 						src="./assets/icons/close.svg"
@@ -49,8 +53,9 @@
 				</header>
 				<form id="contact-form">
 					<div>
-						<label id="prenom" for="firstNameInput">Prénom</label>
+						<label tabindex="0" id="prenom" for="firstNameInput">Prénom</label>
 						<input
+							tabindex="0"
 							id="firstNameInput"
 							name="firstname"
 							type="text"
@@ -59,8 +64,9 @@
 						/>
 					</div>
 					<div>
-						<label id="name" for="nameInput">Nom</label>
+						<label tabindex="0" id="name" for="nameInput">Nom</label>
 						<input
+							tabindex="0"
 							id="nameInput"
 							name="nom"
 							type="text"
@@ -69,8 +75,9 @@
 						/>
 					</div>
 					<div>
-						<label id="email" for="emailInput">Email</label>
+						<label tabindex="0" id="email" for="emailInput">Email</label>
 						<input
+							tabindex="0"
 							id="emailInput"
 							name="email"
 							type="email"
@@ -79,8 +86,11 @@
 						/>
 					</div>
 					<div>
-						<label id="message" for="messageInput">Votre message</label>
+						<label tabindex="0" id="message" for="messageInput"
+							>Votre message</label
+						>
 						<textarea
+							tabindex="0"
 							id="messageInput"
 							name="message"
 							text="Message"
@@ -90,6 +100,7 @@
 					</div>
 
 					<button
+						tabindex="0"
 						id="btn-contact-submit"
 						type="submit"
 						class="contact_button"

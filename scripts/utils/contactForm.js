@@ -13,6 +13,7 @@ function handleEventContactModal() {
 export function displayModal(modalBlock, photographerName) {
 	modalBlock.style.display = 'flex';
 	displayPhotographerName(photographerName);
+	modalBlock.querySelectorAll('[tabindex]:not([tabindex="-1"])')[0].focus();
 }
 
 export function closeModal(modalBlock) {

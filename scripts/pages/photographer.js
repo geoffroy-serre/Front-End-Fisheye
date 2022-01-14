@@ -125,12 +125,12 @@ async function populateInfos(photographers) {
 		if (urlParameter == photographer.id) {
 			const infos = `
 			<div class="photographer__info">
-				<h1 class="photographer__name"  aria-label="Nom du photographe: ${photographer.name}">${photographer.name}</h1>
-				<div class="photographer__location" role="text" aria-label="Lieu de résidence du photographe: ">${photographer.city}, ${photographer.country}</div>
-				<cite class="photographer__tagline" role="text" aria-label="Slogan du photographe">${photographer.tagline}</cite>
+				<h1 tabindex="0" class="photographer__name"  aria-label="Nom du photographe: ${photographer.name}">${photographer.name}</h1>
+				<div tabindex="0" class="photographer__location" role="text" aria-label="Lieu de résidence du photographe: ${photographer.city}, ${photographer.country}">${photographer.city}, ${photographer.country}</div>
+				<cite tabindex="0" class="photographer__tagline" role="text" aria-label="Slogan du photographe: ${photographer.tagline}	">${photographer.tagline}</cite>
 			</div>
-			<button id="contact_button" class="contact_button">Contactez-moi</button>
-			<img class="photographer__id" aria-label="Photo portrait de ${photographer.name}" src="${PHOTOGRAPHERS_ID_PICTURES_PATH}/${photographer.portrait}">
+			<button tabindex="0" id="contact_button" class="contact_button">Contactez-moi</button>
+			<img tabindex="0" class="photographer__id" aria-label="Photo portrait de ${photographer.name}" src="${PHOTOGRAPHERS_ID_PICTURES_PATH}/${photographer.portrait}">
 			`;
 
 			infoSection.innerHTML = infos;

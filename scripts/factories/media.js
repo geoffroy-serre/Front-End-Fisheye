@@ -23,13 +23,19 @@ export const mediaFactory = (media, index, filteredMedias) => {
 	const titleSpan = document.createElement('span');
 	const likeDiv = document.createElement('div');
 	const likeNumber = document.createElement('span');
-	const heartIcon = document.createElement('span');
+	const heartIcon = document.createElement('button');
 
 	container.id = media.id;
 	likeNumber.className = 'like-number';
 	heartIcon.className = 'fas fa-heart';
 	container.className = 'media-card';
 	mediaContainer.className = 'media-card__container';
+
+	titleSpan.setAttribute('tabindex', 0);
+	likeNumber.setAttribute('tabindex', 0);
+	heartIcon.setAttribute('tabindex', 0);
+	heartIcon.setAttribute('aria-label', 'Liker la photo');
+	container.setAttribute('tabindex', -1);
 
 	if (media.image) {
 		const image = document.createElement('img');
@@ -38,7 +44,8 @@ export const mediaFactory = (media, index, filteredMedias) => {
 		description.className = 'media-card__description';
 		image.className = 'media-card__media';
 
-		image.setAttribute('alt', `${media.alt}`);
+		image.setAttribute('alt', `Photo: ${media.alt}`);
+		image.setAttribute('tabindex', 0);
 		image.setAttribute(
 			'src',
 			`${PHOTOGRAPHERS_PATH}/${media.photographerId}/${media.image}`
@@ -58,6 +65,7 @@ export const mediaFactory = (media, index, filteredMedias) => {
 			'src',
 			`${PHOTOGRAPHERS_PATH}/${media.photographerId}/${media.video}`
 		);
+		video.setAttribute('tabindex', 0);
 
 		mediaLink.setAttribute('href', `#`);
 		mediaLink.appendChild(video);
