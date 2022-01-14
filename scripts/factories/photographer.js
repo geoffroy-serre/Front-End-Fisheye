@@ -42,7 +42,7 @@ export const createUserCard = (
 	showPrice.setAttribute('role', 'text');
 	showPrice.setAttribute(
 		'aria-label',
-		`Prix du photographe: ${price} par jour`
+		`Prix du photographe: ${price} euros par jour`
 	);
 
 	link.appendChild(img);

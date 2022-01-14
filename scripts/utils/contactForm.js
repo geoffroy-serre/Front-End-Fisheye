@@ -1,3 +1,15 @@
+const modalBlock = document.getElementById('contact_modal');
+
+handleEventContactModal();
+
+function handleEventContactModal() {
+	window.addEventListener('keydown', (e) => {
+		if (e.key == 'Escape') {
+			closeModal(modalBlock);
+		}
+	});
+}
+
 export function displayModal(modalBlock, photographerName) {
 	modalBlock.style.display = 'flex';
 	displayPhotographerName(photographerName);
