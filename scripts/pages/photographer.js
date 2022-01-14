@@ -80,7 +80,7 @@ async function filterMenu(selectedOption) {
 		<ul class="select__options" role ="listbox">
     		<li class="select__option" ><button type="button" aria-label="Trier par ${otherOptions[0]}">${otherOptions[0]}</button></li>
     		<li class="select__option" ><button type="button" aria-label="Trier par ${otherOptions[1]}">${otherOptions[1]}</button></li>
-    </ul>
+    	</ul>
     `;
 	select.innerHTML = selectFilter;
 
