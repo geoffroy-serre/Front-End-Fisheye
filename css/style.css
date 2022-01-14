@@ -17,7 +17,7 @@
 }
 
 *:focus {
-	outline: 2px solid var(--primary);
+	outline: 2px solid var(--light-red);
 }
 
 body {
