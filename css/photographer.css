@@ -255,9 +255,6 @@
 	top: 0;
 }
 
-.modal .close_button {
-}
-
 .modal {
 	border-radius: 0.31rem;
 	background-color: var(--light-red);
