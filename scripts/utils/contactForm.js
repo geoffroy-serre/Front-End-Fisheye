@@ -1,14 +1,19 @@
 const modalBlock = document.getElementById('contact_modal');
+const submitButton = document.querySelector('#btn-contact-submit');
 
-handleEventContactModal();
+// handleEventContactModal();
 
-function handleEventContactModal() {
-	window.addEventListener('keydown', (e) => {
-		if (e.key == 'Escape') {
-			closeModal(modalBlock);
-		}
-	});
-}
+// function handleEventContactModal() {
+window.addEventListener('keydown', (e) => {
+	if (e.key == 'Escape') {
+		closeModal(modalBlock);
+	}
+});
+submitButton.addEventListener('click', (e) => submitContactForm(e));
+submitButton.addEventListener('keydown', (e) => {
+	if (e.key === 'Enter') submitContactForm(e);
+});
+// }
 
 export function displayModal(modalBlock, photographerName) {
 	modalBlock.style.display = 'flex';
@@ -16,7 +21,7 @@ export function displayModal(modalBlock, photographerName) {
 	modalBlock.querySelectorAll('[tabindex]:not([tabindex="-1"])')[0].focus();
 }
 
-export function closeModal(modalBlock) {
+export function closeModal() {
 	modalBlock.style.display = 'none';
 }
 
@@ -33,7 +38,8 @@ function displayPhotographerName(name) {
  * @param e Event
  * @param HtmlElement modalBlock
  */
-export function submitContactForm(e, modalBlock) {
+export function submitContactForm(e) {
+	console.log('trigger');
 	e.preventDefault();
 	const name = document.querySelector('#nameInput');
 	const firstName = document.querySelector('#firstNameInput');
